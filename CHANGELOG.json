@@ -1,29 +1,14 @@
 {
   "changelog": [
     {
-      "id": "002",
-      "date": "2026-05-15",
-      "version": "v1.0.0",
-      "title": "AnimIconSVG v1.0.0 alpha",
-      "description": "Framer sidebar plugin with 263+ ItsHover animated icons. Stroke-draw hover preview, three insert modes.",
-      "type": "launch",
-      "tags": [
-        "AnimIconSVG"
-      ],
-      "project": "AnimIconSVG",
-      "projectUrl": "https://github.com/izored/AnimIconSVG"
-    },
-    {
       "id": "001",
       "date": "2026-05-15",
       "version": "v1.0.0",
       "title": "AnimIconSVG v1.0.0 alpha",
-      "description": "Full launch. Framer sidebar plugin — search 263+ ItsHover animated icons, preview stroke-draw hover animations, insert in three modes.",
+      "description": "Framer sidebar plugin — search 263+ ItsHover animated icons, preview stroke-draw hover animations, insert in three modes.",
       "type": "launch",
       "tags": [
-        "AnimIconSVG",
-        "framer",
-        "plugin"
+        "AnimIconSVG"
       ],
       "project": "AnimIconSVG",
       "projectUrl": "https://github.com/izored/AnimIconSVG"
