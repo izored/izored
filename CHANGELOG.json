@@ -3,16 +3,13 @@
     {
       "id": "001",
       "date": "2026-05-15",
-      "version": null,
-      "title": "Changelog goes live",
-      "description": "CHANGELOG.json is now live and connected to dev.izo.red. New entries appear here first.",
-      "type": "meta",
-      "tags": [
-        "site",
-        "meta"
-      ],
-      "project": null,
-      "projectUrl": null
+      "version": "v1.0.0",
+      "title": "AnimIconSVG v1.0.0 alpha",
+      "description": "Full launch. Framer sidebar plugin — search 263+ ItsHover animated icons, preview stroke-draw hover animations, insert in three modes.",
+      "type": "launch",
+      "tags": ["AnimIconSVG", "framer", "plugin"],
+      "project": "AnimIconSVG",
+      "projectUrl": "https://github.com/izored/AnimIconSVG"
     }
   ]
 }

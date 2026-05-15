@@ -1,8 +1,11 @@
-name: Auto Changelog on Release
+name: Auto Changelog on Tag / Release
 
 on:
   release:
     types: [published]
+  push:
+    tags:
+      - "v*"
 
 permissions:
   contents: write
@@ -10,6 +13,8 @@ permissions:
 jobs:
   add-release-entry:
     runs-on: ubuntu-latest
+    # Skip if this is a tag push that already has a release (release event handles it)
+    if: github.event_name == 'release' || github.event_name == 'push'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,18 +31,44 @@ jobs:
               ? parseInt(data.changelog[0].id, 10)
               : 0;
 
-            const release = context.payload.release;
+            const isRelease = context.eventName === 'release';
             const repoName = context.repo.repo;
+
+            let version, title, description, date;
+
+            if (isRelease) {
+              const release = context.payload.release;
+              version = release.tag_name;
+              title = release.name || release.tag_name;
+              // Keep full body (emojis and all), trim to 500 chars
+              description = release.body
+                ? release.body.trim().slice(0, 500)
+                : `${release.tag_name} released`;
+              date = release.published_at.split('T')[0];
+            } else {
+              // Tag push — get commit message
+              const tag = context.ref.replace('refs/tags/', '');
+              const sha = context.sha;
+              const commit = await github.rest.repos.getCommit({
+                owner: context.repo.owner,
+                repo: repoName,
+                ref: sha,
+              });
+              version = tag;
+              const msg = commit.data.commit.message;
+              const lines = msg.trim().split('\n').filter(l => l.trim());
+              title = lines[0].replace(/^release:\s*/i, '').trim();
+              description = lines.slice(1).filter(l => l.trim()).join(' ').slice(0, 500) || title;
+              date = new Date().toISOString().split('T')[0];
+            }
 
             const newEntry = {
               id: String(lastId + 1).padStart(3, '0'),
-              date: release.published_at.split('T')[0],
-              version: release.tag_name,
-              title: release.name || release.tag_name,
-              description: release.body
-                ? release.body.split('\n')[0].replace(/^#+\s*/, '').slice(0, 200)
-                : `${release.tag_name} released`,
-              type: "launch",
+              date,
+              version,
+              title,
+              description,
+              type: 'launch',
               tags: [repoName],
               project: repoName,
               projectUrl: `https://github.com/${context.repo.owner}/${repoName}`,
@@ -51,5 +82,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add CHANGELOG.json
-          git commit -m "changelog: ${{ github.event.release.name }} ${{ github.event.release.tag_name }}"
+          git diff --cached --quiet || git commit -m "changelog: ${{ github.ref_name }}"
           git push
