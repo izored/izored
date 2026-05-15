@@ -1,0 +1,15 @@
+{
+  "changelog": [
+    {
+      "id": "001",
+      "date": "2026-05-15",
+      "version": null,
+      "title": "Changelog goes live",
+      "description": "CHANGELOG.json is now live and connected to dev.izo.red. New entries appear here first.",
+      "type": "meta",
+      "tags": ["site", "meta"],
+      "project": null,
+      "projectUrl": null
+    }
+  ]
+}

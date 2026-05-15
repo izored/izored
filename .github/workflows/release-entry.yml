@@ -1,0 +1,52 @@
+name: Auto Changelog on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  add-release-entry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Prepend release entry to CHANGELOG.json
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const data = JSON.parse(fs.readFileSync('CHANGELOG.json', 'utf8'));
+
+            const lastId = data.changelog.length > 0
+              ? parseInt(data.changelog[0].id, 10)
+              : 0;
+
+            const release = context.payload.release;
+            const repoName = context.repo.repo;
+
+            const newEntry = {
+              id: String(lastId + 1).padStart(3, '0'),
+              date: release.published_at.split('T')[0],
+              version: release.tag_name,
+              title: release.name || release.tag_name,
+              description: release.body
+                ? release.body.split('\n')[0].replace(/^#+\s*/, '').slice(0, 200)
+                : `${release.tag_name} released`,
+              type: "launch",
+              tags: [repoName],
+              project: repoName,
+              projectUrl: `https://github.com/${context.repo.owner}/${repoName}`,
+            };
+
+            data.changelog.unshift(newEntry);
+            fs.writeFileSync('CHANGELOG.json', JSON.stringify(data, null, 2) + '\n');
+
+      - name: Commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CHANGELOG.json
+          git commit -m "changelog: ${{ github.event.release.name }} ${{ github.event.release.tag_name }}"
+          git push
