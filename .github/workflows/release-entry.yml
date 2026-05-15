@@ -6,6 +6,8 @@ on:
   push:
     tags:
       - "v*"
+  repository_dispatch:
+    types: [release-published]
 
 permissions:
   contents: write
@@ -13,8 +15,6 @@ permissions:
 jobs:
   add-release-entry:
     runs-on: ubuntu-latest
-    # Skip if this is a tag push that already has a release (release event handles it)
-    if: github.event_name == 'release' || github.event_name == 'push'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -31,35 +31,43 @@ jobs:
               ? parseInt(data.changelog[0].id, 10)
               : 0;
 
-            const isRelease = context.eventName === 'release';
-            const repoName = context.repo.repo;
+            let version, title, description, date, repoName, projectUrl;
 
-            let version, title, description, date;
+            if (context.eventName === 'repository_dispatch') {
+              const p = context.payload.client_payload;
+              version = p.version;
+              title = p.title;
+              description = p.description;
+              date = p.date;
+              repoName = p.repo;
+              projectUrl = p.projectUrl;
 
-            if (isRelease) {
+            } else if (context.eventName === 'release') {
               const release = context.payload.release;
+              repoName = context.repo.repo;
               version = release.tag_name;
               title = release.name || release.tag_name;
-              // Keep full body (emojis and all), trim to 500 chars
               description = release.body
                 ? release.body.trim().slice(0, 500)
                 : `${release.tag_name} released`;
               date = release.published_at.split('T')[0];
+              projectUrl = `https://github.com/${context.repo.owner}/${repoName}`;
+
             } else {
-              // Tag push — get commit message
+              // tag push
+              repoName = context.repo.repo;
               const tag = context.ref.replace('refs/tags/', '');
-              const sha = context.sha;
               const commit = await github.rest.repos.getCommit({
                 owner: context.repo.owner,
                 repo: repoName,
-                ref: sha,
+                ref: context.sha,
               });
               version = tag;
-              const msg = commit.data.commit.message;
-              const lines = msg.trim().split('\n').filter(l => l.trim());
+              const lines = commit.data.commit.message.trim().split('\n').filter(l => l.trim());
               title = lines[0].replace(/^release:\s*/i, '').trim();
               description = lines.slice(1).filter(l => l.trim()).join(' ').slice(0, 500) || title;
               date = new Date().toISOString().split('T')[0];
+              projectUrl = `https://github.com/${context.repo.owner}/${repoName}`;
             }
 
             const newEntry = {
@@ -71,7 +79,7 @@ jobs:
               type: 'launch',
               tags: [repoName],
               project: repoName,
-              projectUrl: `https://github.com/${context.repo.owner}/${repoName}`,
+              projectUrl,
             };
 
             data.changelog.unshift(newEntry);
@@ -82,5 +90,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add CHANGELOG.json
-          git diff --cached --quiet || git commit -m "changelog: ${{ github.ref_name }}"
+          git diff --cached --quiet || git commit -m "changelog: ${{ github.event.client_payload.repo || github.ref_name }}"
           git push
