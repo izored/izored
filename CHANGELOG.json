@@ -1,17 +1,6 @@
 {
   "changelog": [
     {
-      "id": "002",
-      "date": "2026-05-15",
-      "version": null,
-      "title": "Workflow test",
-      "description": "Testing the manual changelog dispatch. If you see this on dev.izo.red — it works.",
-      "type": "meta",
-      "tags": [],
-      "project": null,
-      "projectUrl": null
-    },
-    {
       "id": "001",
       "date": "2026-05-15",
       "version": null,
