@@ -1,6 +1,5 @@
 // Framer Code Component — paste into Framer's "Code" component editor
 // Fetches CHANGELOG.json from raw GitHub and renders entries.
-// Supports filtering by type and project.
 
 import { addPropertyControls, ControlType } from "framer"
 import { useEffect, useState } from "react"
@@ -8,16 +7,28 @@ import { useEffect, useState } from "react"
 const RAW_URL =
     "https://raw.githubusercontent.com/izored/izored/main/CHANGELOG.json"
 
+const TYPE_CONFIG: Record<string, { color: string; bg: string; emoji: string }> = {
+    launch:     { color: "#4ADE80", bg: "#4ADE8022", emoji: "🚀" },
+    update:     { color: "#60A5FA", bg: "#60A5FA22", emoji: "✨" },
+    fix:        { color: "#FB923C", bg: "#FB923C22", emoji: "🔧" },
+    experiment: { color: "#C084FC", bg: "#C084FC22", emoji: "🧪" },
+    meta:       { color: "#888888", bg: "#88888822", emoji: "📝" },
+}
+
+const DEFAULT_TYPE = { color: "#888888", bg: "#88888822", emoji: "📦" }
+
 type Entry = {
     id: string
     date: string
     version: string | null
+    emoji: string | null
     title: string
     description: string
     type: string
     tags: string[]
     project: string | null
     projectUrl: string | null
+    releaseUrl: string | null
 }
 
 type Props = {
@@ -27,7 +38,8 @@ type Props = {
     showDate: boolean
     showType: boolean
     showProject: boolean
-    accentColor: string
+    showVersion: boolean
+    showEmoji: boolean
     textColor: string
     mutedColor: string
     gap: number
@@ -41,7 +53,8 @@ export default function ChangelogFeed({
     showDate = true,
     showType = true,
     showProject = true,
-    accentColor = "#FFB800",
+    showVersion = true,
+    showEmoji = true,
     textColor = "#ffffff",
     mutedColor = "#888888",
     gap = 24,
@@ -51,7 +64,7 @@ export default function ChangelogFeed({
     const [error, setError] = useState(false)
 
     useEffect(() => {
-        fetch(RAW_URL)
+        fetch(`${RAW_URL}?_=${Date.now()}`)
             .then((r) => r.json())
             .then((data) => setEntries(data.changelog ?? []))
             .catch(() => setError(true))
@@ -80,101 +93,133 @@ export default function ChangelogFeed({
                 width: "100%",
             }}
         >
-            {filtered.map((entry) => (
-                <div
-                    key={entry.id}
-                    style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 6,
-                    }}
-                >
+            {filtered.map((entry) => {
+                const tc = TYPE_CONFIG[entry.type] ?? DEFAULT_TYPE
+                const icon = entry.emoji || tc.emoji
+
+                return (
                     <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            gap: 8,
-                            flexWrap: "wrap",
-                        }}
+                        key={entry.id}
+                        style={{ display: "flex", gap: 12, alignItems: "flex-start" }}
                     >
-                        {showType && (
-                            <span
+                        {showEmoji && (
+                            <div
                                 style={{
-                                    fontSize: 10,
+                                    fontSize: 20,
+                                    lineHeight: 1,
+                                    marginTop: 2,
+                                    flexShrink: 0,
+                                    width: 28,
+                                    textAlign: "center",
+                                }}
+                            >
+                                {icon}
+                            </div>
+                        )}
+
+                        <div style={{ display: "flex", flexDirection: "column", gap: 5, flex: 1 }}>
+                            {/* Meta row */}
+                            <div
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: 8,
+                                    flexWrap: "wrap",
+                                }}
+                            >
+                                {showType && (
+                                    <span
+                                        style={{
+                                            fontSize: 10,
+                                            fontWeight: 700,
+                                            letterSpacing: "0.08em",
+                                            textTransform: "uppercase",
+                                            color: tc.color,
+                                            background: tc.bg,
+                                            borderRadius: 4,
+                                            padding: "2px 7px",
+                                        }}
+                                    >
+                                        {entry.type}
+                                    </span>
+                                )}
+
+                                {showProject && entry.project && (
+                                    <a
+                                        href={entry.projectUrl ?? undefined}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{
+                                            fontSize: 11,
+                                            color: mutedColor,
+                                            textDecoration: "none",
+                                            fontWeight: 500,
+                                        }}
+                                    >
+                                        {entry.project}
+                                    </a>
+                                )}
+
+                                {showVersion && entry.version && (
+                                    <a
+                                        href={entry.releaseUrl ?? undefined}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{
+                                            fontSize: 10,
+                                            color: mutedColor,
+                                            textDecoration: "none",
+                                            opacity: 0.7,
+                                        }}
+                                    >
+                                        {entry.version}
+                                    </a>
+                                )}
+
+                                {showDate && (
+                                    <span
+                                        style={{
+                                            fontSize: 10,
+                                            color: mutedColor,
+                                            marginLeft: "auto",
+                                            opacity: 0.7,
+                                        }}
+                                    >
+                                        {entry.date}
+                                    </span>
+                                )}
+                            </div>
+
+                            {/* Title */}
+                            <a
+                                href={entry.releaseUrl ?? entry.projectUrl ?? undefined}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                style={{
+                                    fontSize: 15,
                                     fontWeight: 600,
-                                    letterSpacing: "0.08em",
-                                    textTransform: "uppercase",
-                                    color: accentColor,
-                                    background: accentColor + "22",
-                                    borderRadius: 4,
-                                    padding: "2px 7px",
+                                    color: textColor,
+                                    lineHeight: 1.3,
+                                    textDecoration: "none",
                                 }}
                             >
-                                {entry.type}
-                            </span>
-                        )}
-                        {showProject && entry.project && (
-                            entry.projectUrl ? (
-                                <a
-                                    href={entry.projectUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    style={{
-                                        fontSize: 10,
-                                        color: mutedColor,
-                                        textDecoration: "none",
-                                    }}
-                                >
-                                    {entry.project}
-                                </a>
-                            ) : (
-                                <span
-                                    style={{ fontSize: 10, color: mutedColor }}
-                                >
-                                    {entry.project}
-                                </span>
-                            )
-                        )}
-                        {entry.version && (
-                            <span
-                                style={{ fontSize: 10, color: mutedColor }}
-                            >
-                                {entry.version}
-                            </span>
-                        )}
-                        {showDate && (
-                            <span
+                                {entry.title}
+                            </a>
+
+                            {/* Description */}
+                            <div
                                 style={{
-                                    fontSize: 10,
+                                    fontSize: 13,
                                     color: mutedColor,
-                                    marginLeft: "auto",
+                                    lineHeight: 1.6,
                                 }}
                             >
-                                {entry.date}
-                            </span>
-                        )}
+                                {entry.description}
+                            </div>
+                        </div>
                     </div>
-                    <div
-                        style={{
-                            fontSize: 15,
-                            fontWeight: 600,
-                            color: textColor,
-                            lineHeight: 1.3,
-                        }}
-                    >
-                        {entry.title}
-                    </div>
-                    <div
-                        style={{
-                            fontSize: 13,
-                            color: mutedColor,
-                            lineHeight: 1.6,
-                        }}
-                    >
-                        {entry.description}
-                    </div>
-                </div>
-            ))}
+                )
+            })}
         </div>
     )
 }
@@ -207,7 +252,7 @@ addPropertyControls(ChangelogFeed, {
     },
     showType: {
         type: ControlType.Boolean,
-        title: "Show type badge",
+        title: "Show type pill",
         defaultValue: true,
     },
     showProject: {
@@ -215,10 +260,15 @@ addPropertyControls(ChangelogFeed, {
         title: "Show project",
         defaultValue: true,
     },
-    accentColor: {
-        type: ControlType.Color,
-        title: "Accent color",
-        defaultValue: "#FFB800",
+    showVersion: {
+        type: ControlType.Boolean,
+        title: "Show version",
+        defaultValue: true,
+    },
+    showEmoji: {
+        type: ControlType.Boolean,
+        title: "Show emoji icon",
+        defaultValue: true,
     },
     textColor: {
         type: ControlType.Color,

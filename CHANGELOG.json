@@ -4,27 +4,27 @@
       "id": "002",
       "date": "2026-05-15",
       "version": "v1.0.0",
+      "emoji": "🎨",
       "title": "AnimIconSVG v1.0.0 alpha",
       "description": "Framer sidebar plugin — search 263+ ItsHover animated icons, preview stroke-draw hover animations, insert in three modes.",
       "type": "launch",
-      "tags": [
-        "AnimIconSVG"
-      ],
+      "tags": ["AnimIconSVG"],
       "project": "AnimIconSVG",
-      "projectUrl": "https://github.com/izored/AnimIconSVG"
+      "projectUrl": "https://github.com/izored/AnimIconSVG",
+      "releaseUrl": "https://github.com/izored/AnimIconSVG/releases/tag/v1.0.0"
     },
     {
       "id": "001",
       "date": "2026-05-09",
       "version": "v1.7.42",
-      "title": "🚀 OpenMemo v1.7.42 — dashboard settings, layout cleanup, and editor fixes",
+      "emoji": "🧠",
+      "title": "OpenMemo v1.7.42 — dashboard settings, layout cleanup, editor fixes",
       "description": "🧩 Dashboard grid density control, 🧱 masonry layout, ✍️ full note-detail editing, 🗂️ Settings redesign. Fixes: markdown paste pipeline, hover animation jitter, store wiring.",
       "type": "update",
-      "tags": [
-        "OpenMemo"
-      ],
+      "tags": ["OpenMemo"],
       "project": "OpenMemo",
-      "projectUrl": "https://github.com/izored/OpenMemo"
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.7.42"
     }
   ]
 }
