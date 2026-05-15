@@ -149,11 +149,22 @@ export default function ChangelogFeed({
                                         href={entry.projectUrl ?? undefined}
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        onMouseEnter={(e) => {
+                                            const t = e.currentTarget
+                                            t.style.color = tc.color
+                                            t.style.textDecoration = "underline"
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            const t = e.currentTarget
+                                            t.style.color = mutedColor
+                                            t.style.textDecoration = "none"
+                                        }}
                                         style={{
                                             fontSize: 11,
                                             color: mutedColor,
                                             textDecoration: "none",
                                             fontWeight: 500,
+                                            transition: "color 0.15s ease",
                                         }}
                                     >
                                         {entry.project}
