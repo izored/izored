@@ -1,6 +1,21 @@
 {
   "changelog": [
     {
+      "id": "004",
+      "date": "2026-05-16",
+      "version": "v0.48.0",
+      "emoji": "🚀",
+      "title": "v0.48.0",
+      "description": "## 🛠️ Bug fixes\n\n- 🔍 `event.search` — refactored from O(n) per-event queries to a single LEFT JOIN; actors grouped in JS after one round-trip\n- 🪟 Subject detail panel — no longer blocked by loading state; opens immediately on pill click with loading indicator while data fetches\n- 🪟 Subject detail panel — demo mode fallback: builds subject + events from local data when no DB is connected\n- 📐 Subject detail panel — timeline spine repositioned from mid-dates to right of dates, matching main timeline layout\n- 📅 Subject detail panel — years now sorted newest-first, matching main timeline order\n- 🖱️ Subject detail panel — mouse wheel scroll now works; Lenis no longer intercepts events inside the panel\n- ⚙️ Settings page — Export and About cards now side by side in the bento grid instead of stacked in one column\n\n## 📚 Documentation\n\n- 📖 `CONTRIBUTING.md` — added: setup, workflow, code conventions, domain constants, known gaps\n- 🛣️ `ROADMAP.md` — restructured with status key, versioned horizons, and all Settings page placeholders documented as planned items\n- 🔑 `.env.example` — corrected misleading comment on `APP_SECRET`",
+      "type": "launch",
+      "tags": [
+        "openTimeline"
+      ],
+      "project": "openTimeline",
+      "projectUrl": "https://github.com/izored/openTimeline",
+      "releaseUrl": "https://github.com/izored/openTimeline/releases/tag/v0.48.0"
+    },
+    {
       "id": "003",
       "date": "2026-05-16",
       "version": "v0.48.0",
