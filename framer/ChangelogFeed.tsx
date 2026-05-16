@@ -1,5 +1,6 @@
 // Framer Code Component — paste into Framer's "Code" component editor
 // Fetches CHANGELOG.json from raw GitHub and renders entries.
+// v1.2.0
 
 import { addPropertyControls, ControlType } from "framer"
 import { useEffect, useState } from "react"
