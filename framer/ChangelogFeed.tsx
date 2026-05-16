@@ -1,6 +1,6 @@
 // Framer Code Component — paste into Framer's "Code" component editor
 // Fetches CHANGELOG.json from raw GitHub and renders entries.
-// v1.2.0
+// v1.4.0
 
 import { addPropertyControls, ControlType } from "framer"
 import { useEffect, useState } from "react"
@@ -47,7 +47,6 @@ type Props = {
     font: string
 }
 
-// Renders inline backtick code spans
 function renderInline(text: string, textColor: string) {
     const segments = text.split("`")
     return segments.map((seg, i) =>
@@ -57,7 +56,7 @@ function renderInline(text: string, textColor: string) {
                 style={{
                     fontFamily: "monospace",
                     fontSize: "0.92em",
-                    background: "rgba(255,255,255,0.08)",
+                    background: "rgba(0,0,0,0.06)",
                     borderRadius: 3,
                     padding: "1px 5px",
                     color: textColor,
@@ -71,26 +70,30 @@ function renderInline(text: string, textColor: string) {
     )
 }
 
-// Parses description markdown into React nodes
 function renderDescription(raw: string, textColor: string, mutedColor: string) {
     const lines = raw.split("\n")
     const nodes: React.ReactNode[] = []
+    let headingCount = 0
 
     lines.forEach((line, i) => {
         if (!line.trim()) {
-            nodes.push(<div key={i} style={{ height: 4 }} />)
+            return
         } else if (line.startsWith("## ")) {
+            const isFirst = headingCount === 0
+            headingCount++
             nodes.push(
                 <div
                     key={i}
                     style={{
                         fontSize: 10,
                         fontWeight: 700,
-                        letterSpacing: "0.08em",
+                        letterSpacing: "0.1em",
                         textTransform: "uppercase",
                         color: mutedColor,
-                        marginTop: i === 0 ? 0 : 8,
-                        marginBottom: 2,
+                        marginTop: isFirst ? 4 : 16,
+                        marginBottom: 6,
+                        paddingTop: isFirst ? 0 : 12,
+                        borderTop: isFirst ? "none" : "1px solid rgba(0,0,0,0.07)",
                     }}
                 >
                     {line.replace(/^## /, "")}
@@ -99,7 +102,7 @@ function renderDescription(raw: string, textColor: string, mutedColor: string) {
         } else if (line.startsWith("- ")) {
             nodes.push(
                 <div key={i} style={{ display: "flex", gap: 6, alignItems: "flex-start" }}>
-                    <span style={{ color: mutedColor, flexShrink: 0, marginTop: 1, fontSize: 11 }}>–</span>
+                    <span style={{ color: mutedColor, flexShrink: 0, marginTop: 2, fontSize: 10, opacity: 0.6 }}>–</span>
                     <span style={{ color: mutedColor, fontSize: 12, lineHeight: 1.6 }}>
                         {renderInline(line.replace(/^- /, ""), textColor)}
                     </span>
@@ -114,7 +117,7 @@ function renderDescription(raw: string, textColor: string, mutedColor: string) {
         }
     })
 
-    return <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>{nodes}</div>
+    return <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>{nodes}</div>
 }
 
 export default function ChangelogFeed({
@@ -126,9 +129,9 @@ export default function ChangelogFeed({
     showProject = true,
     showVersion = true,
     showEmoji = true,
-    textColor = "#ffffff",
-    mutedColor = "#888888",
-    gap = 24,
+    textColor = "#111111",
+    mutedColor = "#666666",
+    gap = 20,
     font = "inherit",
 }: Props) {
     const [entries, setEntries] = useState<Entry[]>([])
@@ -155,26 +158,73 @@ export default function ChangelogFeed({
     }
 
     return (
-        <div style={{ display: "flex", flexDirection: "column", gap, fontFamily: font, width: "100%" }}>
-            {filtered.map((entry) => {
+        <div style={{ position: "relative", fontFamily: font, width: "100%" }}>
+            {/* Timeline line */}
+            <div style={{
+                position: "absolute",
+                left: 9,
+                top: 20,
+                bottom: 20,
+                width: 2,
+                background: "rgba(0,0,0,0.1)",
+                borderRadius: 2,
+            }} />
+
+            {filtered.map((entry, idx) => {
                 const tc = TYPE_CONFIG[entry.type] ?? DEFAULT_TYPE
                 const icon = entry.emoji || tc.emoji
 
                 return (
-                    <div key={entry.id} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
-                        {showEmoji && (
-                            <div style={{ fontSize: 20, lineHeight: 1, marginTop: 2, flexShrink: 0, width: 28, textAlign: "center" }}>
-                                {icon}
-                            </div>
-                        )}
+                    <div
+                        key={entry.id}
+                        style={{
+                            display: "flex",
+                            gap: 16,
+                            alignItems: "flex-start",
+                            marginBottom: idx < filtered.length - 1 ? gap : 0,
+                        }}
+                    >
+                        {/* Dot column */}
+                        <div style={{ width: 20, flexShrink: 0, display: "flex", justifyContent: "center", paddingTop: 16 }}>
+                            <div style={{
+                                width: 10,
+                                height: 10,
+                                borderRadius: "50%",
+                                background: tc.color,
+                                boxShadow: `0 0 0 3px ${tc.bg}`,
+                                flexShrink: 0,
+                            }} />
+                        </div>
 
-                        <div style={{ display: "flex", flexDirection: "column", gap: 5, flex: 1 }}>
+                        {/* Card */}
+                        <div style={{
+                            flex: 1,
+                            background: "rgba(0,0,0,0.04)",
+                            border: "1px solid rgba(0,0,0,0.07)",
+                            borderRadius: 12,
+                            padding: "14px 16px",
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 8,
+                        }}>
                             {/* Meta row */}
                             <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
                                 {showType && (
-                                    <span style={{ fontSize: 10, fontWeight: 700, letterSpacing: "0.08em", textTransform: "uppercase", color: tc.color, background: tc.bg, borderRadius: 4, padding: "2px 7px" }}>
+                                    <span style={{
+                                        fontSize: 10,
+                                        fontWeight: 700,
+                                        letterSpacing: "0.08em",
+                                        textTransform: "uppercase",
+                                        color: tc.color,
+                                        background: tc.bg,
+                                        borderRadius: 4,
+                                        padding: "2px 7px",
+                                    }}>
                                         {entry.type}
                                     </span>
+                                )}
+                                {showEmoji && (
+                                    <span style={{ fontSize: 15, lineHeight: 1 }}>{icon}</span>
                                 )}
                                 {showProject && entry.project && (
                                     <a
@@ -183,18 +233,23 @@ export default function ChangelogFeed({
                                         rel="noopener noreferrer"
                                         onMouseEnter={(e) => { e.currentTarget.style.color = tc.color }}
                                         onMouseLeave={(e) => { e.currentTarget.style.color = mutedColor }}
-                                        style={{ fontSize: 15, color: mutedColor, textDecoration: "underline", fontWeight: 700 }}
+                                        style={{ fontSize: 13, color: mutedColor, textDecoration: "none", fontWeight: 700 }}
                                     >
                                         {entry.project}
                                     </a>
                                 )}
                                 {showVersion && entry.version && (
-                                    <a href={entry.releaseUrl ?? undefined} target="_blank" rel="noopener noreferrer" style={{ fontSize: 10, color: mutedColor, textDecoration: "none", opacity: 0.7 }}>
+                                    <a
+                                        href={entry.releaseUrl ?? undefined}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{ fontSize: 11, color: mutedColor, textDecoration: "none", opacity: 0.55 }}
+                                    >
                                         {entry.version}
                                     </a>
                                 )}
                                 {showDate && (
-                                    <span style={{ fontSize: 10, color: mutedColor, marginLeft: "auto", opacity: 0.7 }}>
+                                    <span style={{ fontSize: 10, color: mutedColor, marginLeft: "auto", opacity: 0.55 }}>
                                         {entry.date}
                                     </span>
                                 )}
@@ -205,12 +260,12 @@ export default function ChangelogFeed({
                                 href={entry.releaseUrl ?? entry.projectUrl ?? undefined}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                style={{ fontSize: 13, fontWeight: 500, color: textColor, lineHeight: 1.3, textDecoration: "none" }}
+                                style={{ fontSize: 15, fontWeight: 700, color: textColor, lineHeight: 1.3, textDecoration: "none" }}
                             >
                                 {entry.title}
                             </a>
 
-                            {/* Description — parsed markdown */}
+                            {/* Description */}
                             {renderDescription(entry.description, textColor, mutedColor)}
                         </div>
                     </div>
@@ -221,16 +276,16 @@ export default function ChangelogFeed({
 }
 
 addPropertyControls(ChangelogFeed, {
-    filterType: { type: ControlType.String, title: "Filter type", defaultValue: "", placeholder: "launch / update / fix / meta" },
-    filterProject: { type: ControlType.String, title: "Filter project", defaultValue: "", placeholder: "OpenMemo" },
-    maxEntries: { type: ControlType.Number, title: "Max entries", defaultValue: 10, min: 1, max: 50, step: 1 },
-    showDate: { type: ControlType.Boolean, title: "Show date", defaultValue: true },
-    showType: { type: ControlType.Boolean, title: "Show type pill", defaultValue: true },
-    showProject: { type: ControlType.Boolean, title: "Show project", defaultValue: true },
-    showVersion: { type: ControlType.Boolean, title: "Show version", defaultValue: true },
-    showEmoji: { type: ControlType.Boolean, title: "Show emoji icon", defaultValue: true },
-    textColor: { type: ControlType.Color, title: "Text color", defaultValue: "#ffffff" },
-    mutedColor: { type: ControlType.Color, title: "Muted color", defaultValue: "#888888" },
-    gap: { type: ControlType.Number, title: "Gap", defaultValue: 24, min: 8, max: 64, step: 4 },
-    font: { type: ControlType.String, title: "Font family", defaultValue: "inherit" },
+    filterType:    { type: ControlType.String,  title: "Filter type",    defaultValue: "", placeholder: "launch / update / fix / meta" },
+    filterProject: { type: ControlType.String,  title: "Filter project", defaultValue: "", placeholder: "OpenMemo" },
+    maxEntries:    { type: ControlType.Number,  title: "Max entries",    defaultValue: 10, min: 1, max: 50, step: 1 },
+    showDate:      { type: ControlType.Boolean, title: "Show date",      defaultValue: true },
+    showType:      { type: ControlType.Boolean, title: "Show type pill", defaultValue: true },
+    showProject:   { type: ControlType.Boolean, title: "Show project",   defaultValue: true },
+    showVersion:   { type: ControlType.Boolean, title: "Show version",   defaultValue: true },
+    showEmoji:     { type: ControlType.Boolean, title: "Show emoji",     defaultValue: true },
+    textColor:     { type: ControlType.Color,   title: "Text color",     defaultValue: "#111111" },
+    mutedColor:    { type: ControlType.Color,   title: "Muted color",    defaultValue: "#666666" },
+    gap:           { type: ControlType.Number,  title: "Gap",            defaultValue: 20, min: 8, max: 64, step: 4 },
+    font:          { type: ControlType.String,  title: "Font family",    defaultValue: "inherit" },
 })
