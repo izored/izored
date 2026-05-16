@@ -1,6 +1,6 @@
 // Framer Code Component — paste into Framer's "Code" component editor
 // Fetches CHANGELOG.json from raw GitHub and renders entries.
-// v1.4.0
+// v1.5.0
 
 import { addPropertyControls, ControlType } from "framer"
 import { useEffect, useState } from "react"
@@ -43,6 +43,7 @@ type Props = {
     showEmoji: boolean
     textColor: string
     mutedColor: string
+    cardColor: string
     gap: number
     font: string
 }
@@ -131,6 +132,7 @@ export default function ChangelogFeed({
     showEmoji = true,
     textColor = "#111111",
     mutedColor = "#666666",
+    cardColor = "rgba(0,0,0,0.04)",
     gap = 20,
     font = "inherit",
 }: Props) {
@@ -199,7 +201,7 @@ export default function ChangelogFeed({
                         {/* Card */}
                         <div style={{
                             flex: 1,
-                            background: "rgba(0,0,0,0.04)",
+                            background: cardColor,
                             border: "1px solid rgba(0,0,0,0.07)",
                             borderRadius: 12,
                             padding: "14px 16px",
@@ -286,6 +288,7 @@ addPropertyControls(ChangelogFeed, {
     showEmoji:     { type: ControlType.Boolean, title: "Show emoji",     defaultValue: true },
     textColor:     { type: ControlType.Color,   title: "Text color",     defaultValue: "#111111" },
     mutedColor:    { type: ControlType.Color,   title: "Muted color",    defaultValue: "#666666" },
+    cardColor:     { type: ControlType.Color,   title: "Card color",     defaultValue: "rgba(0,0,0,0.04)" },
     gap:           { type: ControlType.Number,  title: "Gap",            defaultValue: 20, min: 8, max: 64, step: 4 },
     font:          { type: ControlType.String,  title: "Font family",    defaultValue: "inherit" },
 })
