@@ -180,9 +180,9 @@ export default function ChangelogFeed({
                                         href={entry.projectUrl ?? undefined}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        onMouseEnter={(e) => { e.currentTarget.style.color = tc.color; e.currentTarget.style.textDecoration = "underline" }}
-                                        onMouseLeave={(e) => { e.currentTarget.style.color = mutedColor; e.currentTarget.style.textDecoration = "none" }}
-                                        style={{ fontSize: 13, color: mutedColor, textDecoration: "none", fontWeight: 700 }}
+                                        onMouseEnter={(e) => { e.currentTarget.style.color = tc.color }}
+                                        onMouseLeave={(e) => { e.currentTarget.style.color = mutedColor }}
+                                        style={{ fontSize: 15, color: mutedColor, textDecoration: "underline", fontWeight: 700 }}
                                     >
                                         {entry.project}
                                     </a>
@@ -204,7 +204,7 @@ export default function ChangelogFeed({
                                 href={entry.releaseUrl ?? entry.projectUrl ?? undefined}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                style={{ fontSize: 15, fontWeight: 600, color: textColor, lineHeight: 1.3, textDecoration: "none" }}
+                                style={{ fontSize: 13, fontWeight: 500, color: textColor, lineHeight: 1.3, textDecoration: "none" }}
                             >
                                 {entry.title}
                             </a>
