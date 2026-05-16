@@ -182,7 +182,7 @@ export default function ChangelogFeed({
                                         rel="noopener noreferrer"
                                         onMouseEnter={(e) => { e.currentTarget.style.color = tc.color; e.currentTarget.style.textDecoration = "underline" }}
                                         onMouseLeave={(e) => { e.currentTarget.style.color = mutedColor; e.currentTarget.style.textDecoration = "none" }}
-                                        style={{ fontSize: 11, color: mutedColor, textDecoration: "none", fontWeight: 500 }}
+                                        style={{ fontSize: 13, color: mutedColor, textDecoration: "none", fontWeight: 700 }}
                                     >
                                         {entry.project}
                                     </a>

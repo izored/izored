@@ -6,7 +6,7 @@
       "version": "v0.48.0",
       "emoji": "🚀",
       "title": "v0.48.0",
-      "description": "## 🛠️ Bug fixes\n\n- 🔍 `event.search` — refactored from O(n) per-event queries to a single LEFT JOIN; actors grouped in JS after one round-trip\n- 🪟 Subject detail panel — no longer blocked by loading state; opens immediately on pill click with loading indicator while data fetches\n- 🪟 Subject detail panel — demo mode fallback: builds subject + events from local data when no DB is connected\n- 📐 Subject detail panel — timeline spine repositioned from mid-dates to right of dates, matching main timeline layout\n- 📅 Subject detail panel — years now sorted newest-first, matching main timeline order\n- 🖱️ Subject detail panel — mouse wheel scroll now works; Lenis no longer intercepts events inside the panel\n- ⚙️ Settings page — Export and About cards now side by side in the bento grid instead of stacked in one column\n\n## 📚 Documentation\n\n- 📖 `CONTRIBUTING.md` — added: setup, workflow, code conventions, domain constants, known gaps\n- 🛣️ `ROADMAP.md` — restructured with status key, versioned horizons, and all Settings page placeholders documented as planned items\n- 🔑 `.env.example` — corrected misleading comment on `APP_SECRET`",
+      "description": "## 🛠️ Bug fixes\n\n🔍 `event.search` — refactored from O(n) per-event queries to a single LEFT JOIN; actors grouped in JS after one round-trip\n🪟 Subject detail panel — no longer blocked by loading state; opens immediately on pill click with loading indicator while data fetches\n🪟 Subject detail panel — demo mode fallback: builds subject + events from local data when no DB is connected\n📐 Subject detail panel — timeline spine repositioned from mid-dates to right of dates, matching main timeline layout\n📅 Subject detail panel — years now sorted newest-first, matching main timeline order\n🖱️ Subject detail panel — mouse wheel scroll now works; Lenis no longer intercepts events inside the panel\n⚙️ Settings page — Export and About cards now side by side in the bento grid instead of stacked in one column\n\n## 📚 Documentation\n\n📖 `CONTRIBUTING.md` — added: setup, workflow, code conventions, domain constants, known gaps\n🛣️ `ROADMAP.md` — restructured with status key, versioned horizons, and all Settings page placeholders documented as planned items\n🔑 `.env.example` — corrected misleading comment on `APP_SECRET`",
       "type": "launch",
       "tags": [
         "openTimeline"
@@ -21,7 +21,7 @@
       "version": "v1.0.0",
       "emoji": "🎨",
       "title": "AnimIconSVG v1.0.0 alpha",
-      "description": "🔌 Framer sidebar plugin — 🔍 search 263+ ItsHover animated icons, 👁️ preview stroke-draw hover animations, insert in three modes.",
+      "description": "## 🎨 Launch\n\n🔌 Framer sidebar plugin\n🔍 Search 263+ ItsHover animated icons\n👁️ Preview stroke-draw hover animations\nInsert in three modes",
       "type": "launch",
       "tags": [
         "AnimIconSVG"
@@ -36,7 +36,7 @@
       "version": "v1.7.42",
       "emoji": "🧠",
       "title": "OpenMemo v1.7.42 — dashboard settings, layout cleanup, editor fixes",
-      "description": "🧩 Dashboard grid density control, 🧱 masonry layout, ✍️ full note-detail editing, 🗂️ Settings redesign. Fixes: markdown paste pipeline, hover animation jitter, store wiring.",
+      "description": "## ✨ Features\n\n🧩 Dashboard grid density control\n🧱 Masonry layout\n✍️ Full note-detail editing\n🗂️ Settings redesign\n\n## 🔧 Fixes\n\nMarkdown paste pipeline\nHover animation jitter\nStore wiring",
       "type": "update",
       "tags": [
         "OpenMemo"
