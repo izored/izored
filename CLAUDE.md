@@ -41,3 +41,6 @@ Requires `CHANGELOG_TOKEN` secret (fine-grained PAT, Contents R/W on izored/izor
 ## Adding a new project repo
 1. Push `framer/notify-changelog.yml` to the new repo (or copy `.github/workflows/notify-changelog.yml`)
 2. Add `CHANGELOG_TOKEN` secret to that repo (Settings → Secrets → Actions)
+
+## Git rules
+- Never add `Co-Authored-By: Claude ...` trailer to any commit message. Clutters commit history with unwanted AI attribution. Applies to all commits, no exceptions.
