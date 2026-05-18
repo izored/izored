@@ -8,6 +8,37 @@ on:
       - "v*"
   repository_dispatch:
     types: [release-published]
+  workflow_dispatch:
+    inputs:
+      repo:
+        description: "Project repo name"
+        required: true
+      version:
+        description: "Version tag (e.g. v1.7.43)"
+        required: true
+      title:
+        description: "Entry title"
+        required: true
+      description:
+        description: "Full changelog markdown"
+        required: true
+      date:
+        description: "Date (YYYY-MM-DD)"
+        required: true
+      type:
+        description: "Entry type (launch / update / fix)"
+        required: false
+        default: "update"
+      emoji:
+        description: "Emoji"
+        required: false
+        default: "✨"
+      projectUrl:
+        description: "Project URL"
+        required: false
+      releaseUrl:
+        description: "Release URL"
+        required: false
 
 permissions:
   contents: write
@@ -43,29 +74,39 @@ jobs:
 
             if (context.eventName === 'repository_dispatch') {
               const p = context.payload.client_payload;
-              version    = p.version;
-              title      = p.title;
+              version     = p.version;
+              title       = p.title;
               description = p.description;
-              date       = p.date;
-              repoName   = p.repo;
-              projectUrl = p.projectUrl;
-              releaseUrl = p.releaseUrl;
-              type       = p.type || 'launch';
-              emoji      = p.emoji || TYPE_EMOJI[type] || '🚀';
+              date        = p.date;
+              repoName    = p.repo;
+              projectUrl  = p.projectUrl;
+              releaseUrl  = p.releaseUrl;
+              type        = p.type || 'launch';
+              emoji       = p.emoji || TYPE_EMOJI[type] || '🚀';
+
+            } else if (context.eventName === 'workflow_dispatch') {
+              const i = context.payload.inputs;
+              version     = i.version;
+              title       = i.title;
+              description = i.description;
+              date        = i.date;
+              repoName    = i.repo;
+              projectUrl  = i.projectUrl || '';
+              releaseUrl  = i.releaseUrl || '';
+              type        = i.type || 'update';
+              emoji       = i.emoji || TYPE_EMOJI[type] || '✨';
 
             } else if (context.eventName === 'release') {
               const release = context.payload.release;
-              repoName   = context.repo.repo;
-              version    = release.tag_name;
-              title      = release.name || release.tag_name;
-              description = release.body
-                ? release.body.trim().slice(0, 500)
-                : `${release.tag_name} released`;
-              date       = release.published_at.split('T')[0];
-              projectUrl = `https://github.com/${context.repo.owner}/${repoName}`;
-              releaseUrl = `https://github.com/${context.repo.owner}/${repoName}/releases/tag/${version}`;
-              type       = 'launch';
-              emoji      = TYPE_EMOJI.launch;
+              repoName    = context.repo.repo;
+              version     = release.tag_name;
+              title       = release.name || release.tag_name;
+              description = release.body ? release.body.trim() : \`${release.tag_name} released\`;
+              date        = release.published_at.split('T')[0];
+              projectUrl  = \`https://github.com/${context.repo.owner}/${repoName}\`;
+              releaseUrl  = \`https://github.com/${context.repo.owner}/${repoName}/releases/tag/${version}\`;
+              type        = 'launch';
+              emoji       = TYPE_EMOJI.launch;
 
             } else {
               // tag push
@@ -76,15 +117,16 @@ jobs:
                 repo: repoName,
                 ref: context.sha,
               });
-              version    = tag;
-              const lines = commit.data.commit.message.trim().split('\n').filter(l => l.trim());
-              title      = lines[0].replace(/^release:\s*/i, '').trim();
-              description = lines.slice(1).filter(l => l.trim()).join(' ').slice(0, 500) || title;
-              date       = new Date().toISOString().split('T')[0];
-              projectUrl = `https://github.com/${context.repo.owner}/${repoName}`;
-              releaseUrl = `https://github.com/${context.repo.owner}/${repoName}/releases/tag/${version}`;
-              type       = 'launch';
-              emoji      = TYPE_EMOJI.launch;
+              version     = tag;
+              const lines = commit.data.commit.message.trim().split('
+').filter(l => l.trim());
+              title       = lines[0].replace(/^release:\s*/i, '').trim();
+              description = lines.slice(1).filter(l => l.trim()).join(' ') || title;
+              date        = new Date().toISOString().split('T')[0];
+              projectUrl  = \`https://github.com/${context.repo.owner}/${repoName}\`;
+              releaseUrl  = \`https://github.com/${context.repo.owner}/${repoName}/releases/tag/${version}\`;
+              type        = 'launch';
+              emoji       = TYPE_EMOJI.launch;
             }
 
             const newEntry = {
@@ -102,12 +144,13 @@ jobs:
             };
 
             data.changelog.unshift(newEntry);
-            fs.writeFileSync('CHANGELOG.json', JSON.stringify(data, null, 2) + '\n');
+            fs.writeFileSync('CHANGELOG.json', JSON.stringify(data, null, 2) + '
+');
 
       - name: Commit
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add CHANGELOG.json
-          git diff --cached --quiet || git commit -m "changelog: ${{ github.event.client_payload.repo || github.ref_name }}"
+          git diff --cached --quiet || git commit -m "changelog: ${{ github.event.client_payload.repo || github.event.inputs.repo || github.ref_name }}"
           git push
