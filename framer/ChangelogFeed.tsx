@@ -1,6 +1,7 @@
 // Framer Code Component — paste into Framer's "Code" component editor
 // Fetches CHANGELOG.json from raw GitHub and renders entries.
-// v1.5.0
+// Made by Izored — https://dev.izo.red
+// v1.6.0
 
 import { addPropertyControls, ControlType } from "framer"
 import { useEffect, useState } from "react"
@@ -105,7 +106,8 @@ function renderDescription(raw: string, textColor: string, mutedColor: string) {
                     {line.replace(/^## /, "")}
                 </div>
             )
-        } else if (line.startsWith("- ")) {
+        } else if (line.trimStart().startsWith("•")) {
+            const content = line.trimStart().replace(/^•\s*/, "")
             nodes.push(
                 <div
                     key={i}
@@ -113,18 +115,19 @@ function renderDescription(raw: string, textColor: string, mutedColor: string) {
                         display: "flex",
                         gap: 6,
                         alignItems: "flex-start",
+                        paddingLeft: 8,
                     }}
                 >
                     <span
                         style={{
                             color: mutedColor,
                             flexShrink: 0,
-                            marginTop: 2,
-                            fontSize: 10,
-                            opacity: 0.6,
+                            marginTop: 3,
+                            fontSize: 9,
+                            opacity: 0.5,
                         }}
                     >
-                        –
+                        •
                     </span>
                     <span
                         style={{
@@ -133,7 +136,7 @@ function renderDescription(raw: string, textColor: string, mutedColor: string) {
                             lineHeight: 1.6,
                         }}
                     >
-                        {renderInline(line.replace(/^- /, ""), textColor)}
+                        {renderInline(content, textColor)}
                     </span>
                 </div>
             )
@@ -223,7 +226,7 @@ export default function ChangelogFeed({
                             marginBottom: idx < filtered.length - 1 ? gap : 0,
                         }}
                     >
-                        {/* Dot column */}
+                        {/* Dot */}
                         <div
                             style={{
                                 width: 20,
@@ -343,24 +346,54 @@ export default function ChangelogFeed({
                             </div>
 
                             {/* Title */}
-                            <a
-                                href={
-                                    entry.releaseUrl ??
-                                    entry.projectUrl ??
-                                    undefined
-                                }
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                style={{
-                                    fontSize: 15,
-                                    fontWeight: 500,
-                                    color: textColor,
-                                    lineHeight: 1.3,
-                                    textDecoration: "none",
-                                }}
-                            >
-                                {entry.title}
-                            </a>
+                            {(() => {
+                                const parts = entry.title.split(" — ")
+                                const main =
+                                    parts[0].charAt(0).toUpperCase() +
+                                    parts[0].slice(1)
+                                const sub = parts.slice(1).join(" — ")
+                                return (
+                                    <a
+                                        href={
+                                            entry.releaseUrl ??
+                                            entry.projectUrl ??
+                                            undefined
+                                        }
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        style={{
+                                            textDecoration: "none",
+                                            display: "flex",
+                                            flexDirection: "column",
+                                            gap: 2,
+                                        }}
+                                    >
+                                        <span
+                                            style={{
+                                                fontSize: 15,
+                                                fontWeight: 600,
+                                                color: textColor,
+                                                lineHeight: 1.3,
+                                            }}
+                                        >
+                                            {main}
+                                        </span>
+                                        {sub && (
+                                            <span
+                                                style={{
+                                                    fontSize: 12,
+                                                    fontWeight: 400,
+                                                    color: mutedColor,
+                                                    lineHeight: 1.4,
+                                                    opacity: 0.8,
+                                                }}
+                                            >
+                                                {sub}
+                                            </span>
+                                        )}
+                                    </a>
+                                )
+                            })()}
 
                             {/* Description */}
                             {renderDescription(
