@@ -1,6 +1,21 @@
 {
   "changelog": [
     {
+      "id": "007",
+      "date": "2026-05-18",
+      "version": "v1.8.0",
+      "emoji": "🚀",
+      "title": "OpenMemo 1.8.0",
+      "description": "## [1.8.0] - 2026-05-18\n\n### Added\n\n- 🎨 **Full UI rebuild on a new design-token system** — introduced a cohesive, token-driven design system (`openmemo.css`, Satoshi/General Sans/Cabinet fonts, full inline icon set, appearance helpers) and rebuilt every screen against the live FastAPI backend (no mock data).\n- 🧩 **Collections page** (`/collections`) — stacked-card hover fan-out, per-collection memo count + recent titles via `useQueries`, hover edit button, \"New collection\" card; cover uses the",
+      "type": "launch",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.8.0"
+    },
+    {
       "id": "006",
       "date": "2026-05-18",
       "version": "v1.7.43",
