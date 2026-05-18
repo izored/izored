@@ -8,39 +8,7 @@
       "title": "v1.7.43 — Live drag-to-reorder",
       "description": "Added: Live drag-to-reorder with real-time card swapping. FLIP settle animation on drop via framer-motion. Spring lift effect on dragged card. README overhaul. Fixed: diagonal drag misfires (pointerWithin collision detection). Snap-back on drop (stale closure). Up/down drag broken. Max update depth crash.",
       "type": "update",
-      "tags": [
-        "OpenMemo"
-      ],
-      "project": "OpenMemo",
-      "projectUrl": "https://github.com/izored/OpenMemo",
-      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.7.43"
-    },
-    {
-      "id": "005",
-      "date": "2026-05-18",
-      "version": "v1.7.43",
-      "emoji": "🚀",
-      "title": "v1.7.43 — Live drag-to-reorder",
-      "description": "Added: Live drag-to-reorder with real-time card swapping. FLIP settle animation on drop via framer-motion. Spring lift effect on dragged card. README overhaul. Fixed: diagonal drag misfires (pointerWithin collision detection). Snap-back on drop (stale closure). Up/down drag broken. Max update depth crash.",
-      "type": "launch",
-      "tags": [
-        "OpenMemo"
-      ],
-      "project": "OpenMemo",
-      "projectUrl": "https://github.com/izored/OpenMemo",
-      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.7.43"
-    },
-    {
-      "id": "004",
-      "date": "2026-05-18",
-      "version": "v1.7.43",
-      "emoji": "🚀",
-      "title": "v1.7.43",
-      "description": "v1.7.43 released",
-      "type": "launch",
-      "tags": [
-        "OpenMemo"
-      ],
+      "tags": ["OpenMemo"],
       "project": "OpenMemo",
       "projectUrl": "https://github.com/izored/OpenMemo",
       "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.7.43"
@@ -53,9 +21,7 @@
       "title": "openTimeline v0.48.0 — panel fixes, search perf & docs",
       "description": "## 🛠️ Bug fixes\n\n🔍 `event.search` — refactored from O(n) per-event queries to a single LEFT JOIN; actors grouped in JS after one round-trip\n🪟 Subject detail panel — no longer blocked by loading state; opens immediately on pill click with loading indicator while data fetches\n🪟 Subject detail panel — demo mode fallback: builds subject + events from local data when no DB is connected\n📐 Subject detail panel — timeline spine repositioned from mid-dates to right of dates, matching main timeline layout\n📅 Subject detail panel — years now sorted newest-first, matching main timeline order\n🖱️ Subject detail panel — mouse wheel scroll now works; Lenis no longer intercepts events inside the panel\n⚙️ Settings page — Export and About cards now side by side in the bento grid instead of stacked in one column\n\n## 📚 Documentation\n\n📖 `CONTRIBUTING.md` — added: setup, workflow, code conventions, domain constants, known gaps\n🛣️ `ROADMAP.md` — restructured with status key, versioned horizons, and all Settings page placeholders documented as planned items\n🔑 `.env.example` — corrected misleading comment on `APP_SECRET`",
       "type": "launch",
-      "tags": [
-        "openTimeline"
-      ],
+      "tags": ["openTimeline"],
       "project": "openTimeline",
       "projectUrl": "https://github.com/izored/openTimeline",
       "releaseUrl": "https://github.com/izored/openTimeline/releases/tag/v0.48.0"
@@ -68,9 +34,7 @@
       "title": "AnimIconSVG v1.0.0 alpha",
       "description": "## 🎨 Launch\n\n🔌 Framer sidebar plugin\n🔍 Search 263+ ItsHover animated icons\n👁️ Preview stroke-draw hover animations\nInsert in three modes",
       "type": "launch",
-      "tags": [
-        "AnimIconSVG"
-      ],
+      "tags": ["AnimIconSVG"],
       "project": "AnimIconSVG",
       "projectUrl": "https://github.com/izored/AnimIconSVG",
       "releaseUrl": "https://github.com/izored/AnimIconSVG/releases/tag/v1.0.0"
@@ -83,9 +47,7 @@
       "title": "OpenMemo v1.7.42 — dashboard settings, layout cleanup, editor fixes",
       "description": "## ✨ Features\n\n🧩 Dashboard grid density control\n🧱 Masonry layout\n✍️ Full note-detail editing\n🗂️ Settings redesign\n\n## 🔧 Fixes\n\nMarkdown paste pipeline\nHover animation jitter\nStore wiring",
       "type": "update",
-      "tags": [
-        "OpenMemo"
-      ],
+      "tags": ["OpenMemo"],
       "project": "OpenMemo",
       "projectUrl": "https://github.com/izored/OpenMemo",
       "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.7.42"
