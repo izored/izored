@@ -1,6 +1,21 @@
 {
   "changelog": [
     {
+      "id": "006",
+      "date": "2026-05-18",
+      "version": "v1.7.43",
+      "emoji": "✨",
+      "title": "v1.7.43 — Live drag-to-reorder",
+      "description": "Added: Live drag-to-reorder with real-time card swapping. FLIP settle animation on drop via framer-motion. Spring lift effect on dragged card. README overhaul. Fixed: diagonal drag misfires (pointerWithin collision detection). Snap-back on drop (stale closure). Up/down drag broken. Max update depth crash.",
+      "type": "update",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.7.43"
+    },
+    {
       "id": "005",
       "date": "2026-05-18",
       "version": "v1.7.43",
