@@ -1,6 +1,20 @@
 {
   "changelog": [
     {
+      "id": "008",
+      "date": "2026-05-18",
+      "version": "v1.8.0",
+      "emoji": "🚀",
+      "title": "OpenMemo 1.8.0",
+      "type": "launch",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.8.0"
+    },
+    {
       "id": "007",
       "date": "2026-05-18",
       "version": "v1.7.43",
