@@ -101,15 +101,14 @@ jobs:
               repoName    = context.repo.repo;
               version     = release.tag_name;
               title       = release.name || release.tag_name;
-              description = release.body ? release.body.trim() : \`${release.tag_name} released\`;
+              description = release.body ? release.body.trim() : `${release.tag_name} released`;
               date        = release.published_at.split('T')[0];
-              projectUrl  = \`https://github.com/${context.repo.owner}/${repoName}\`;
-              releaseUrl  = \`https://github.com/${context.repo.owner}/${repoName}/releases/tag/${version}\`;
+              projectUrl  = `https://github.com/${context.repo.owner}/${repoName}`;
+              releaseUrl  = `https://github.com/${context.repo.owner}/${repoName}/releases/tag/${version}`;
               type        = 'launch';
               emoji       = TYPE_EMOJI.launch;
 
             } else {
-              // tag push
               repoName = context.repo.repo;
               const tag = context.ref.replace('refs/tags/', '');
               const commit = await github.rest.repos.getCommit({
@@ -118,13 +117,12 @@ jobs:
                 ref: context.sha,
               });
               version     = tag;
-              const lines = commit.data.commit.message.trim().split('
-').filter(l => l.trim());
+              const lines = commit.data.commit.message.trim().split('\n').filter(l => l.trim());
               title       = lines[0].replace(/^release:\s*/i, '').trim();
               description = lines.slice(1).filter(l => l.trim()).join(' ') || title;
               date        = new Date().toISOString().split('T')[0];
-              projectUrl  = \`https://github.com/${context.repo.owner}/${repoName}\`;
-              releaseUrl  = \`https://github.com/${context.repo.owner}/${repoName}/releases/tag/${version}\`;
+              projectUrl  = `https://github.com/${context.repo.owner}/${repoName}`;
+              releaseUrl  = `https://github.com/${context.repo.owner}/${repoName}/releases/tag/${version}`;
               type        = 'launch';
               emoji       = TYPE_EMOJI.launch;
             }
@@ -144,8 +142,7 @@ jobs:
             };
 
             data.changelog.unshift(newEntry);
-            fs.writeFileSync('CHANGELOG.json', JSON.stringify(data, null, 2) + '
-');
+            fs.writeFileSync('CHANGELOG.json', JSON.stringify(data, null, 2) + '\n');
 
       - name: Commit
         run: |
