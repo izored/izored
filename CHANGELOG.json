@@ -35,8 +35,8 @@
       "date": "2026-05-15",
       "version": "v1.0.0",
       "emoji": "🎨",
-      "title": "alpha launch",
-      "description": "## Launch\n\n  • `Framer sidebar plugin` — search and insert animated icons directly from the Framer canvas.\n  • `Icon search` — browse 263+ ItsHover animated icons with live preview.\n  • `Stroke-draw animations` — preview hover animations before inserting.\n  • `Insert modes` — three insert options for flexible workflow.",
+      "title": "alpha — static SVG, 3 insert modes, settings",
+      "description": "## Added\n\n  • `Icon grid` — 263 icons fetched from GitHub Raw registry; 24h localStorage cache with offline fallback.\n  • `Three insert modes` — Motion (ItsHover animated, static SVG extraction in this release), SvgIcon (static), CSS Stroke (basic stroke-draw).\n  • `Hover-to-prefetch` — 200ms delay prefetch; drag-and-drop + click-to-insert via framer.addSVGNode(); clipboard fallback.\n  • `Settings page` — theme toggle, default size slider (16–64px), default color picker + presets, cache clear.\n  • `Category filters` — All, Arrows, Brand, Social, Letters, Tech filter chips.\n  • `MotionGuide overlay` — shown for Motion insert mode.\n  • `Toast notifications` — insert feedback toasts.\n  • `Info page` — plugin and icon library attribution.\n\n## Changed\n\n  • `Plugin name` — renamed from \"ItsHover Icons\" to AnimIconSVG in framer.json.\n  • `Design system` — Settings and Info pages aligned: same padding (12px), typography scale, section spacing, shared footer.\n\n## Fixed\n\n  • `Settings viewport` — condensed to fit 600px plugin height without scrollbar.\n  • `Info page footer` — now pins to bottom of viewport.\n  • `Missing dependency` — installed vite-plugin-framer dev dependency.",
       "type": "launch",
       "tags": [
         "AnimIconSVG"
