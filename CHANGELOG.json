@@ -6,14 +6,103 @@
       "version": "v1.8.0",
       "emoji": "🚀",
       "title": "OpenMemo 1.8.0",
-      "description": "## [1.8.0] - 2026-05-18\n\n- Full UI rebuild on token-driven design system with new fonts and icon set\n- Collections page with stacked cards, memo counts, and drag-to-reorder\n- Live Appearance panel for theme, accent, layout, and background customization\n- New-memo glass capture panel with animated tabs for Link/Note/Media/Voice\n- Command search overlay (⌘K) and fullscreen distraction-free writer\n- First-run onboarding tour and Ask memo chat history with session management\n- Storage stats endpoint showing disk usage breakdown by type\n- Local thumbnail cache and dominant-color card backdrops\n- Settings redesigned with bento grid masonry layout\n- Maintenance endpoints for cache clearing and workspace reset",
-      "type": "launch",
+      "description": "## [1.8.0] - 2026-05-18\n\n### Added\n- Design system rebuild: token-driven CSS, new fonts, full icon set, rebuilt all screens\n- Collections page with stacked cards, memo counts, recent titles, edit + drag-to-reorder\n- New-memo glass panel with animated tabs (Link/Note/Media/Voice)\n- Live Appearance panel: theme, accents, card style, layout, background with fade slider\n- Sort dropdown (Recent/Oldest/Title/Custom); command search overlay (⌘K)\n- Fullscreen distraction-free writer; storage stats with disk usage breakdown\n- Maintenance endpoints (Clear cache, Reset workspace); browser extension card\n- First-run onboarding tour; Ask memo chat history with session list\n- Local thumbnail cache; dominant-color card backdrops; changelog modal with version check\n\n### Changed\n- Memo detail stays routed; new Boxed/Full layout toggle\n- Settings redesigned with bento grid masonry; Creator card replaces Identity\n- Density locked to roomy; text color reserved for content\n\n### Fixed\n- Background image capped 5MB, canvas downscaled before storage\n- Collection picker now flyout instead of cropped dropdown\n- Masonry columns tightened for better memo card sizing",
+      "type": "update",
       "tags": [
         "OpenMemo"
       ],
       "project": "OpenMemo",
       "projectUrl": "https://github.com/izored/OpenMemo",
       "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.8.0"
+    },
+    {
+      "id": "008",
+      "date": "2026-05-18",
+      "version": "v1.8.0",
+      "emoji": "🚀",
+      "title": "OpenMemo 1.8.0",
+      "type": "update",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.8.0"
+    },
+    {
+      "id": "007",
+      "date": "2026-05-18",
+      "version": "v1.7.43",
+      "emoji": "🚀",
+      "title": "v1.7.43",
+      "description": "v1.7.43 released",
+      "type": "launch",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.7.43"
+    },
+    {
+      "id": "006",
+      "date": "2026-05-18",
+      "version": "v1.7.43",
+      "emoji": "âœ¨",
+      "title": "Live drag-to-reorder",
+      "description": "## Added\n\n  â€¢ `Live drag-to-reorder` â€” cards visually swap in real time while holding and dragging, powered by onDragOver + synchronous dragOrderRef to avoid stale state.\n  â€¢ `FLIP settle animation` â€” on drop, framer-motion layout animates each card to its final position with a 250ms ease-out spring.\n  â€¢ `Drag lift effect` â€” the held card springs into a slightly scaled, rotated state using framer-motion, matching the motion.dev drag feel.\n  â€¢ `README overhaul` â€” updated copy, fixed docs/MEMORY.md and docs/DESIGN.md paths, corrected roadmap link to Specs/ROADMAP.md.\n\n## Changed\n\n  â€¢ `Collision detection â†’ pointerWithin` â€” swap only triggers when the pointer is physically inside another card's bounds; fixes diagonal move mis-fires and cross-column jumps.\n  â€¢ `Drag architecture` â€” removed dnd-kit CSS transforms entirely; array order controls card positions, DragOverlay shows the floating ghost.\n\n## Fixed\n\n  â€¢ `Maximum update depth exceeded` â€” caused by rectSortingStrategy measuring DOM rects in a layout effect loop during rapid swaps. Reverted to verticalListSortingStrategy.\n  â€¢ `Snap-back on drop` â€” handleDragEnd was reading stale localMemos closure; replaced with synchronous dragOrderRef that updates in the same tick as each swap.\n  â€¢ `Up/down drag broken` â€” closestCenter was finding horizontally adjacent cards when dragging vertically; fixed by switching to pointerWithin.",
+      "type": "update",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.7.43"
+    },
+    {
+      "id": "003",
+      "date": "2026-05-16",
+      "version": "v0.48.0",
+      "emoji": "ðŸš€",
+      "title": "panel fixes â€” search perf & docs",
+      "description": "## Bug fixes\n\n  â€¢ `event.search` â€” refactored from O(n) per-event queries to a single LEFT JOIN; actors grouped in JS after one round-trip.\n  â€¢ `Subject detail panel` â€” no longer blocked by loading state; opens immediately on pill click with loading indicator while data fetches.\n  â€¢ `Subject detail panel (demo)` â€” builds subject + events from local data when no DB is connected.\n  â€¢ `Subject detail panel (spine)` â€” timeline spine repositioned from mid-dates to right of dates, matching main timeline layout.\n  â€¢ `Subject detail panel (sort)` â€” years now sorted newest-first, matching main timeline order.\n  â€¢ `Subject detail panel (scroll)` â€” mouse wheel scroll now works; Lenis no longer intercepts events inside the panel.\n  â€¢ `Settings page` â€” Export and About cards now side by side in the bento grid instead of stacked in one column.\n\n## Documentation\n\n  â€¢ `CONTRIBUTING.md` â€” added setup, workflow, code conventions, domain constants, known gaps.\n  â€¢ `ROADMAP.md` â€” restructured with status key, versioned horizons, and all Settings page placeholders documented.\n  â€¢ `.env.example` â€” corrected misleading comment on APP_SECRET.",
+      "type": "launch",
+      "tags": [
+        "openTimeline"
+      ],
+      "project": "openTimeline",
+      "projectUrl": "https://github.com/izored/openTimeline",
+      "releaseUrl": "https://github.com/izored/openTimeline/releases/tag/v0.48.0"
+    },
+    {
+      "id": "002",
+      "date": "2026-05-15",
+      "version": "v1.0.0",
+      "emoji": "ðŸŽ¨",
+      "title": "alpha â€” static SVG, 3 insert modes, settings",
+      "description": "## Added\n\n  â€¢ `Icon grid` â€” 263 icons fetched from GitHub Raw registry; 24h localStorage cache with offline fallback.\n  â€¢ `Three insert modes` â€” Motion (ItsHover animated, static SVG extraction in this release), SvgIcon (static), CSS Stroke (basic stroke-draw).\n  â€¢ `Hover-to-prefetch` â€” 200ms delay prefetch; drag-and-drop + click-to-insert via framer.addSVGNode(); clipboard fallback.\n  â€¢ `Settings page` â€” theme toggle, default size slider (16â€“64px), default color picker + presets, cache clear.\n  â€¢ `Category filters` â€” All, Arrows, Brand, Social, Letters, Tech filter chips.\n  â€¢ `MotionGuide overlay` â€” shown for Motion insert mode.\n  â€¢ `Toast notifications` â€” insert feedback toasts.\n  â€¢ `Info page` â€” plugin and icon library attribution.\n\n## Changed\n\n  â€¢ `Plugin name` â€” renamed from \"ItsHover Icons\" to AnimIconSVG in framer.json.\n  â€¢ `Design system` â€” Settings and Info pages aligned: same padding (12px), typography scale, section spacing, shared footer.\n\n## Fixed\n\n  â€¢ `Settings viewport` â€” condensed to fit 600px plugin height without scrollbar.\n  â€¢ `Info page footer` â€” now pins to bottom of viewport.\n  â€¢ `Missing dependency` â€” installed vite-plugin-framer dev dependency.",
+      "type": "launch",
+      "tags": [
+        "AnimIconSVG"
+      ],
+      "project": "AnimIconSVG",
+      "projectUrl": "https://github.com/izored/AnimIconSVG",
+      "releaseUrl": "https://github.com/izored/AnimIconSVG/releases/tag/v1.0.0"
+    },
+    {
+      "id": "001",
+      "date": "2026-05-09",
+      "version": "v1.7.42",
+      "emoji": "ðŸ§ ",
+      "title": "dashboard settings â€” layout cleanup & editor fixes",
+      "description": "## Added\n\n  â€¢ `Dashboard grid density control` â€” 4/5 memo-card layout setting in SettingsPage so dashboard density can be changed from Settings.\n  â€¢ `Grid preference persistence` â€” dashboardGridColumns state and setter to the app store so the chosen layout survives refreshes.\n  â€¢ `Masonry dashboard` â€” masonry-style layout for the main dashboard to better accommodate variable memo card heights.\n  â€¢ `Inline BAF action` â€” moved the BAF/Add New action beside the search bar for faster dashboard access.\n  â€¢ `Full note-detail editing` â€” note detail editor, rendered markdown view, and toolbar improvements.\n  â€¢ `Settings redesign foundation` â€” bento-style Settings redesign, creator/info cards, and supporting stats improvements.\n\n## Changed\n\n  â€¢ `Appearance settings flow` â€” dashboard grid control inside Appearance section with refined segmented control styling.\n  â€¢ `Dashboard layout wiring` â€” MemoGrid now reads the saved dashboard grid preference instead of a hardcoded 5-column layout.\n  â€¢ `Header and navigation polish` â€” dashboard top bar, inline controls, hamburger/header work, and homepage CSS refinements aligned.\n  â€¢ `Memo card readability` â€” cleaned up memo card text hierarchy for clearer scanning.\n  â€¢ `FAB behavior` â€” Speed Dial flow now aligns better with direct note creation and inline dashboard actions.\n\n## Removed\n\n  â€¢ `Floating FAB wiring` â€” removed from Layout.tsx along with stale related imports and unused state.\n  â€¢ `MemoCast surface` â€” continued cleanup of MemoCast-facing navigation and routing in the active UI flow.\n  â€¢ `Broken settings collapse` â€” removed inconsistent keyboard-shortcuts collapse behavior from Settings.\n\n## Fixed\n\n  â€¢ `Speed dial JSX` â€” fixed the broken JSX block in SpeedDialFAB.tsx.\n  â€¢ `Hover animation jitter` â€” separated parent positioning transforms from child hover scale transforms in SpeedDialFAB.tsx.\n  â€¢ `Duplicate store destructure` â€” removed the repeated useAppStore() destructure that caused redeclare issues.\n  â€¢ `Store wiring for grid controls` â€” fixed missing app store state/setter pair so 4/5 dashboard buttons work correctly.\n  â€¢ `Markdown paste and render` â€” preserved markdown syntax on paste, improved code block handling, tightened typography.\n  â€¢ `Markdown editor view-first` â€” fixed read/view mode initialization and blur-save handling.",
+      "type": "update",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.7.42"
     }
   ]
 }
