@@ -1,6 +1,21 @@
 {
   "changelog": [
     {
+      "id": "011",
+      "date": "2026-05-18",
+      "version": "v1.8.2",
+      "emoji": "🚀",
+      "title": "v1.8.2 — Backup & Restore",
+      "description": "## [1.8.2] - 2026-05-19\n\n### Added\n\n- 💾 **Backup & Restore** — `POST /api/backup?scope=structure` downloads a hot SQLite snapshot (memos, collections, tags, chats, memocasts) as a zip; `scope=full` also bundles all uploaded files (thumbnail cache excluded). `POST /api/backup/restore` accepts the zip, disposes the SQLAlchemy pool atomically, replaces the database, and restores files for full-scope backups. Settings page gains a **Backup & Restore** card with Download buttons for each scope and a double-confirmed Restore flow.",
+      "type": "launch",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.8.2"
+    },
+    {
       "id": "010",
       "date": "2026-05-18",
       "version": "v1.8.1",
