@@ -1,6 +1,21 @@
 {
   "changelog": [
     {
+      "id": "011",
+      "date": "2026-05-19",
+      "version": "v1.8.5",
+      "emoji": "🚀",
+      "title": "OpenMemo v1.8.5",
+      "description": "## [1.8.5] - 2026-05-19\n\n### Fixed\n\n- 🔌 **Browser extension connectivity** — added a `chrome-extension://*` CORS regex on the API and the missing `scripting` manifest permission; the popup no longer falsely reports \"Is the server running?\".\n\n### Changed\n\n- 🖼️ **Defuddle-style link extraction** — `extract_url` now reads JSON-LD schema.org images, resolves all image/link URLs absolute, strips nav/footer/ad clutter, and keeps images in the markdown so MemoDetail renders the hero and inline images.\n- 🧠 **Extension extracts from the live DOM** — content script now does meta + JSON-LD + readable-content → markdown extraction in-page (works on SPA / bot-walled sites like Dribbble where a server fetch returns nothing); sends `thumbnail`/`description` to `/ingest/extension`, which only falls back to a server fetch for missing fields.",
+      "type": "launch",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v1.8.5"
+    },
+    {
       "id": "010",
       "date": "2026-05-19",
       "version": "v1.8.4",
