@@ -1,6 +1,21 @@
 {
   "changelog": [
     {
+      "id": "019",
+      "date": "2026-08-04",
+      "version": "v3.4.1",
+      "emoji": "🚀",
+      "title": "openMemo v3.4.1 — A release pipeline that cannot half-finish",
+      "description": "## [3.4.1] - 2026-08-04\n\n### Changed\n\n- 🧱 **Cutting a release is now one command that refuses to half-finish.** `bump-version.ps1` checks everything it can before touching a file: you are on main, main is exactly what is on GitHub, the tag is not already taken, every file that names a version already agrees, the changelog actually has entries to release, and the tests pass. It rolls back if a write fails, pushes the branch and confirms it landed *before* the tag goes out, then waits for the release and checks the published notes are really the changelog. A dry run prints the whole thing and changes nothing. The release process is written down in `docs/RELEASING.md`.\n- 🔢 **The version can no longer drift between files.** openMemo states its version in six places and nothing compared them, so the macOS lockfile sat at 2.2.0 for eight releases. A test now fails any pull request where they disagree, and the release workflow refuses to publish a tag that does not match the code. The same test catches a duplicated changelog heading, which is how 3.3.0's notes briefly ended up merged into another section.\n\n---",
+      "type": "launch",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v3.4.1"
+    },
+    {
       "id": "018",
       "date": "2026-08-03",
       "version": "v3.3.0",
