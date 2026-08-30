@@ -1,6 +1,21 @@
 {
   "changelog": [
     {
+      "id": "036",
+      "date": "2026-08-30",
+      "version": "v3.14.1",
+      "emoji": "🚀",
+      "title": "openMemo v3.14.1 — Refreshing inside a collection keeps you there",
+      "description": "## Fixed\n\n  • `A collection you are looking at survives a refresh, and has its own link` — Opening a collection only set a flag in memory while the address bar still said you were on the dashboard. Refresh, and the flag was gone and so were you, back on All Memos. It also meant a collection could not be bookmarked, could not be sent to yourself, and the browser's back button skipped straight past it. Spaces never had this problem, because a Space puts its id in the address; collections now work the same way, at `/collection/<id>` and `/space/<id>/collection/<id>`. Reload where you are and you stay there.",
+      "type": "launch",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v3.14.1"
+    },
+    {
       "id": "035",
       "date": "2026-08-30",
       "version": "v3.14.0",
