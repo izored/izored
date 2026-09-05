@@ -1,6 +1,21 @@
 {
   "changelog": [
     {
+      "id": "044",
+      "date": "2026-09-05",
+      "version": "v3.19.0",
+      "emoji": "🚀",
+      "title": "openMemo v3.19.0 — Wrong pulls repair themselves, collections go where you put them",
+      "description": "## Added\n\n  • `openMemo now notices when a pull came back wrong, and offers to fix it` — Until now a bad pull was silent. A memo could be visibly, obviously wrong on the page and nothing in the app knew: the checks that run every hour looked for missing files and lost sound, and had no idea what a wrong pull even looked like.\n\nTwo things are now checked. A memo filed as a video whose file has no pictures in it, which is the song a photo post was playing saved instead of the photos. And a memo saved from a read that could not find the post inside its page, usually a cookie notice getting in the way, which means it may be missing photos the post actually has.\n\nBoth show up under Settings, in Data safety, with a button that repairs them. The button asks first: one click tells you how many memos it would fetch again, a second click starts it. Nothing goes out to a website until you say so twice.\n\n  • `A save that could not read the post properly tries again by itself, once` — This is the one that fixes the problem without you ever seeing it. The usual cause is a cookie notice, and the first attempt is what clears it: openMemo declines the notice and remembers that, so the second attempt walks straight past the thing that blocked the first. The album that prompted all of this reads perfectly on the second try.\n\nIt reads the post again and downloads nothing, so it cannot fight with a download already in progress, cannot override your setting about pulling videos automatically, and cannot touch a memo you asked for the song of. It happens once. A post that stays unreadable costs one extra read and then stops asking.\n\nIt is off for links forwarded in bulk from Telegram, where thirty forwarded links would have meant thirty page loads nobody asked for. It also refuses outright to touch anything holding music, whatever else it has been told, because a memo that started as a video link and was later turned into a song still remembers the read that saved it.\n\nRe-reading the ones that could not be read properly is a separate tick box, off by default, because that half can mean hundreds of page loads.\n\n  • `Drag your collections into the order you want them` — The sidebar list was in whatever order the database handed it over, which is the order you happened to create them in. Grab a collection and drop it where it belongs. The order sticks across reloads and restarts, because it is written down rather than remembered by the browser.\nDragging is the only ordering there is. No sort menu, no \"by name\", nothing that can quietly undo an order you arranged by hand. A new collection lands at the bottom of the list, where you just made it, and stays there until you move it.\nDropping a memo onto a collection still files it, exactly as before. The two gestures live on the same row and do not get in each other's way: a short drag of a memo card files it, a drag of the collection row itself moves the row.\nDesktop only, on purpose. The sidebar on a phone is one scrolling column, and turning its rows into drag handles is the quickest way to lose that scroll. The Collections page still reorders on touch through its Edit button.\n## Changed\n\n  • `Reordering collections is one request now` — Dragging a card on the Collections page used to fire one save per collection, all at once. With 45 collections that is 45 writes for a single drag. It is a single write for the whole list, which is also what stops two collections ending up with the same position.",
+      "type": "launch",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v3.19.0"
+    },
+    {
       "id": "043",
       "date": "2026-09-05",
       "version": "v3.18.1",
