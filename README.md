@@ -40,7 +40,7 @@ Ollama · OpenWebUI · ComfyUI · n8n · Docker · Cloudflare · PowerShell
 
 **Local, on the two 4090s (Ollama)**
 
-- `Qwen3-Coder-Next 80B` · `Qwen3.6 35B` · `Qwen3.5 27B / 9B` · `Qwen2.5-Coder 14B` : daily drivers for code and reasoning
+- `Qwen3.8` · `Qwen3-Coder-Next 80B` · `Qwen3.6 35B` · `Qwen3.5 27B / 9B` : daily drivers for code and reasoning
 - `Gemma 4 31B` · `Gemma 4 26B-A4B` · `Gemma 4 E4B` : fast creative and everyday tasks
 - `DeepSeek R1 32B` : long reasoning chains
 - `gpt-oss 20B` · `Nemotron 3 Nano 4B` · `Phi-4-mini` : small, quick, always resident
@@ -48,10 +48,10 @@ Ollama · OpenWebUI · ComfyUI · n8n · Docker · Cloudflare · PowerShell
 
 **Hosted**
 
-- Claude Opus 5, through Claude Code and Cowork
-- Kimi 2.6 Pro
-- Google Gemini
-- Perplexity
+- `Claude Opus 5` · `Claude Sonnet 5` · `Claude Fable 5.1` : through Claude Code and Cowork
+- `Kimi 2.6 Pro`
+- `Google Gemini`
+- `Perplexity`
 
 
 ---
