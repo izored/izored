@@ -1,6 +1,21 @@
 {
   "changelog": [
     {
+      "id": "049",
+      "date": "2026-09-10",
+      "version": "v3.21.1",
+      "emoji": "🚀",
+      "title": "openMemo v3.21.1 — Facebook albums save as photos, and updating the Mac app changes the Mac app",
+      "description": "## Fixed\n  • `A Facebook photo album is saved as photos, not as a video that will not play` — This was the fifth report of the same thing: an album arrives as a video memo with nothing to play, no gallery, and a download that fails. Three separate problems were stacked on top of each other, and any one of them alone was enough to produce it.\n\nFacebook hands out two spellings of a share link and openMemo only knew one, so the shorter one was never followed to the post it points at. Even following it does not help on its own, because a group post shows a login wall to anyone not signed in, and there is no post on that page to read. And the one piece of metadata that claims to say what a post is reports a four-photo album as a video.\n\nopenMemo now follows any share link, whatever its spelling, and works out what it points at by looking at where it lands. When the page itself is walled, it reads the post's photo set out of the data the page still ships, anchored to that post so a neighbouring post's pictures can never be the answer. A real Facebook video is still saved as a video.\n\n  • `Updating the Mac app actually changes the Mac app` — 3.21.0 added a back button on every page and turned the sidebar collapse control into a hamburger. The .dmg contained both, and installing it changed nothing on screen.\n\nThe app loads its own interface over a local address, and that address was served with no instruction about caching at all. A browser given no instruction invents one, so the window was free to reuse the previous version's interface from a cache that lives with your library and survives replacing the app entirely. Old page, old code, new app, no error.\n\nThe interface is now checked against the app on every load, which costs one tiny request and settles the question. The files that carry a version stamp in their name are still cached forever, because their name changes whenever they do. And a version change now clears what the previous build left behind, so a Mac that is currently stuck on an old screen is repaired by updating rather than by knowing about a cache it cannot see.",
+      "type": "launch",
+      "tags": [
+        "OpenMemo"
+      ],
+      "project": "OpenMemo",
+      "projectUrl": "https://github.com/izored/OpenMemo",
+      "releaseUrl": "https://github.com/izored/OpenMemo/releases/tag/v3.21.1"
+    },
+    {
       "id": "048",
       "date": "2026-09-10",
       "version": "v3.21.0",
