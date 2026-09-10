@@ -31,20 +31,27 @@ Creative Director from Brussels. Recently started building tools and can't seem 
 Cinema 4D · Octane Render · After Effects · Photoshop · Affinity Suite
 
 **Building & exploring**
-VS Code · Claude Code · Kimi 2.6 · OpenMemo
+VS Code · Claude Code · Cowork · OpenMemo
 Ollama · OpenWebUI · ComfyUI · n8n · Docker · Cloudflare · PowerShell
 
 ---
 
-#### 🧠 AI + Models I run locally
+#### 🧠 Models
 
-- Claude Code / coWork
-- Kimi 2.6 Moderatto
-- Google Gemini
-- Qwen3.6 27B / Qwen3-Coder — daily driver for code & reasoning
-- Gemma 4 27B - e4B — fast creative tasks
-- DeepSeek R1 — deep reasoning chains
-- Llama variants — experimentation & fine-tuning tests
+**Local, on the two 4090s (Ollama)**
+
+- `Qwen3.8` · `Qwen3-Coder-Next 80B` · `Qwen3.6 35B` · `Qwen3.5 27B / 9B` : daily drivers for code and reasoning
+- `Gemma 4 31B` · `Gemma 4 26B-A4B` · `Gemma 4 E4B` : fast creative and everyday tasks
+- `DeepSeek R1 32B` : long reasoning chains
+- `gpt-oss 20B` · `Nemotron 3 Nano 4B` · `Phi-4-mini` : small, quick, always resident
+- `nomic-embed-text v2 MoE` : the embeddings behind OpenMemo's semantic search
+
+**Hosted**
+
+- `Claude Opus 5` · `Claude Sonnet 5` · `Claude Fable 5.1` : through Claude Code and Cowork
+- `Kimi 2.6 Pro`
+- `Google Gemini`
+- `Perplexity`
 
 
 ---
