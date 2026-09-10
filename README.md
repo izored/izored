@@ -11,6 +11,7 @@
 [![X](https://img.shields.io/badge/X-%40izored-black?logo=x)](https://x.com/izo_red)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-izored-blue?logo=linkedin)](https://linkedin.com/in/izo)
 [![Location](https://img.shields.io/badge/📍-Bruxelles%2C%20Belgium-lightgrey)](https://github.com/izored)
+[![Sponsor](https://img.shields.io/badge/sponsor-%E2%9D%A4-db61a2?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/izored) [![Buy me a coffee](https://img.shields.io/badge/buy%20me%20a%20coffee-ffdd00?logo=buymeacoffee&logoColor=black)](https://buymeacoffee.com/izored)
 
 Creative Director from Brussels. Recently started building tools and can't seem to stop. Sharing them in case they help someone else too. Dual RTX 4090s, a fleet of containers, and a deep obsession with making LLMs actually useful. 10+ years in Cinema 4D CGI and photography, now aiming to build systems that power the next wave of creative tooling.
 
